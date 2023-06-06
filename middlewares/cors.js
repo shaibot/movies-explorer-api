@@ -1,15 +1,15 @@
 const allowedCors = [
-  'https://pr15.nomoredomains.rocks',
-  'http://pr15.nomoredomains.rocks',
-  'https://api.pr15.nomoredomains.rocks/users/me',
-  'https://api.pr15.nomoredomains.rocks/cards',
-  'https://api.pr15.nomoredomains.rocks/signup',
+  'https://movie-exp.nomoredomains.rocks',
+  'http://movie-exp.nomoredomains.rocks',
+  'https://api.movie-exp.nomoredomains.rocks/users/me',
+  'https://api.movie-exp.nomoredomains.rocks/cards',
+  'https://api.movie-exp.nomoredomains.rocks/signup',
   'http://localhost:3000',
   'http://localhost:3001',
   'http://localhost:3001',
   'http://localhost:4000',
-  'https://51.250.104.105',
-  'http://51.250.104.105',
+  'https://51.250.102.164',
+  'http://51.250.102.164',
 ];
 
 module.exports = (req, res, next) => {
