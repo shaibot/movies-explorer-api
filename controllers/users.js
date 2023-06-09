@@ -5,13 +5,13 @@ const NotFound = require('../Errors/NotFound');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 const { DEV_SECRET, NODE_PRODUCTION } = require('../config');
-const { CODE_CREATED, CODE } = require('../utils/constants');
+const { CODE_CREATED, CODE, MESSAGE_ERROR_INCORRECT_ID, MESSAGE_SUCCESSFULL_SIGNOUT, MESSAGE_SUCCESSFULL_SIGNIN } = require('../utils/constants');
 
 const checkUser = (user, res, next) => {
   if (user) {
     return res.send({ data: user });
   }
-  const error = new NotFound('Пользователь по указанному _id не найден');
+  const error = new NotFound(MESSAGE_ERROR_INCORRECT_ID);
   return next(error);
 };
 
@@ -66,7 +66,7 @@ const login = (req, res, next) => {
         { expiresIn: '7d' },
       );
       res.cookie('jwt', token, { httpOnly: true, secure: true, sameSite: 'none' });
-      return res.status(CODE).send({ message: 'Вход выполнен успешно' });
+      return res.status(CODE).send({ message: MESSAGE_SUCCESSFULL_SIGNIN });
     })
     .catch(next);
 };
@@ -74,7 +74,7 @@ const login = (req, res, next) => {
 const logout = (req, res) => {
   // Очищаем кукисы
   res.clearCookie('jwt');
-  res.status(CODE).send({ message: 'Вы успешно вышли.' });
+  res.status(CODE).send({ message: MESSAGE_SUCCESSFULL_SIGNOUT });
 };
 
 module.exports = {

@@ -5,7 +5,7 @@ const Movie = require('../models/movie');
 const Forbidden = require('../Errors/Forbidden');
 const BadRequest = require('../Errors/BadRequest');
 const NotFound = require('../Errors/NotFound');
-const { CODE } = require('../utils/constants');
+const { CODE, MESSAGE_ERROR_AVTORISATION, MESSAGE_ERROR_INCORRECT_DATA, MESSAGE_ERROR_INCORRECT_ID, MESSAGE_DELETED_FILM, MESSAGE_ERROR_FILM_NOT_FOUND } = require('../utils/constants');
 
 const getUserMovies = async (req, res, next) => {
   try {
@@ -37,7 +37,7 @@ const createMovie = async (req, res, next) => {
     const ownerId = req.user._id;
 
     if (!ownerId) {
-      throw new Forbidden('Необходима авторизация');
+      throw new Forbidden(MESSAGE_ERROR_AVTORISATION);
     }
 
     const movie = await Movie.create({
@@ -55,7 +55,7 @@ const createMovie = async (req, res, next) => {
       nameEN,
     });
     if (!movie) {
-      throw new BadRequest('Переданы некорректные данные при создании фильма');
+      throw new BadRequest(MESSAGE_ERROR_INCORRECT_DATA);
     }
     res.send(movie);
   } catch (err) {
@@ -69,14 +69,14 @@ const deleteMovie = async (req, res, next) => {
 
     // Проверяем корректность ID
     if (!mongoose.Types.ObjectId.isValid(movieId)) {
-      throw new BadRequest('Некорректный ID фильма');
+      throw new BadRequest(MESSAGE_ERROR_INCORRECT_ID);
     }
 
     const deletedMovie = await Movie.findByIdAndDelete(movieId);
     if (!deletedMovie) {
-      throw new NotFound('Фильм не найден');
+      throw new NotFound(MESSAGE_ERROR_FILM_NOT_FOUND);
     }
-    res.status(CODE).send({ message: 'Фильм успешно удален' });
+    res.status(CODE).send({ message: MESSAGE_DELETED_FILM });
   } catch (err) {
     next(err);
   }
