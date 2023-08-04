@@ -4,6 +4,7 @@ const allowedCors = [
   'https://api.movie-exp.nomoredomains.rocks/users/me',
   'https://api.movie-exp.nomoredomains.rocks/cards',
   'https://api.movie-exp.nomoredomains.rocks/signup',
+  'https://api.movie-exp.nomoredomains.rocks/signin',
   'http://localhost:3000',
   'http://localhost:3001',
   'http://localhost:3001',
