@@ -6,13 +6,13 @@ const { DEV_SECRET, NODE_PRODUCTION } = require("../config");
 const { log } = require("winston");
 
 module.exports = (req, res, next) => {
-  const { cookie, authorization } = req.headers;
+  const { cookie, Authorization } = req.headers;
   let token;
 
   if (cookie) {
     token = cookie.replace("jwt=", "");
-  } else if (authorization && authorization.startsWith("Bearer ")) {
-    token = authorization.slice(7); // убираем "Bearer "
+  } else if (Authorization && Authorization.startsWith("Bearer ")) {
+    token = Authorization.slice(7); // убираем "Bearer "
   }
 
   if (!token) {
