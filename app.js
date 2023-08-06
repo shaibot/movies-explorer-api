@@ -23,8 +23,8 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.use(cors);
 app.use(cookieParser());
+app.use(cors);
 app.use(express.json());
 app.use(helmet());
 app.use(requestLogger);

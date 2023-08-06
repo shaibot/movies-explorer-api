@@ -65,8 +65,8 @@ const login = (req, res, next) => {
         NODE_ENV === NODE_PRODUCTION ? JWT_SECRET : DEV_SECRET,
         { expiresIn: '7d' },
       );
-      res.cookie('jwt', token, { httpOnly: true, secure: true, sameSite: 'none' });
-      return res.status(CODE).send({ message: MESSAGE_SUCCESSFULL_SIGNIN });
+      res.cookie('jwt', token, { httpOnly: false, secure: true, sameSite: 'none' });
+      return res.status(CODE).send({token});
     })
     .catch(next);
 };
